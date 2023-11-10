@@ -16,13 +16,13 @@
         state: absent
     - name: add  nginx directory
       ansible.builtin.file:
-        path: /usr/share/nginx/html/
+        path: /usr/share/nginx/html
         state: directory
-    - name: download and extract the frontend content
+    - name: download and extract the  frontend content
       ansible.builtin.unarchive:
-      src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
-      dest: /usr/share/nginx/html
-      remote_src: yes
+        src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
+        dest: /usr/share/nginx/html
+        remote_src: yes
     - name: enable & start nginx
       ansible.builtin.systemd:
         name: nginx
