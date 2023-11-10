@@ -8,17 +8,17 @@
        state: present
     - name: copy expense configuration file
       ansible.builtin.copy:
-      src: expense.conf
-      dest: /etc/nginx/default.d/expense.conf
+       src: expense.conf
+       dest: /etc/nginx/default.d/expense.conf
     - name: remove the directory
       ansible.builtin.file:
-      path: /usr/share/nginx/html
-      state: directory
+       path: /usr/share/nginx/html
+       state: directory
     - name: download and extract the frontend content
       ansible.builtin.unarchive:
-      src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
-      dest: /usr/share/nginx/html
-      remote_src: yes
+       src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
+       dest: /usr/share/nginx/html
+       remote_src: yes
     - name: enable and restart nginx
       ansible.builtin.systemd:
         name: nginx
