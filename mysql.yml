@@ -1,6 +1,6 @@
 - name: Expense mysql setup
   hosts: all
-  become: true
+  become: yes
   tasks:
     - name: Disable mysql 8 version
       ansible.builtin.shell: dnf module disable mysql -y
@@ -13,7 +13,7 @@
         name: mysql-community-server
         state: present
     - name: enable and restart mysql
-      ansible.builtin.service:
+      ansible.builtin.systemd:
         name: mysqld
         state: restarted
         enabled: yes
