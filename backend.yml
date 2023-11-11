@@ -49,7 +49,7 @@
         state: present
 
     - name: load schema
-      ansible.builtin.shell: mysql -h mysql-dev.praveendevops.online -uroot -p"{{ MYSQL_ROOT_PASSWORD }}"
+      ansible.builtin.shell: mysql -h mysql-dev.praveendevops.online -uroot -p"{{ MYSQL_ROOT_PASSWORD }}" < /app/schema/backend.sql
 
     - name: reload, enable and restart service
       ansible.builtin.systemd:
