@@ -1,0 +1,24 @@
+tasks:
+  - name: Install nginx
+    ansible.builtin.dnf:
+      name: nginx
+      state: present
+
+  - name: copy expense configuration file
+    ansible.builtin.copy:
+      src: expense.conf
+      dest: /etc/nginx/default.d/expense.conf
+
+  - name: Run tasks/other.yaml instead of 'main'
+    ansible.builtin.import_role:
+        name: common
+        tasks_from: app-prereq
+    vars:
+      app_dir: /usr/share/nginx/html
+      component: frontend
+
+  - name: enable and restart nginx
+    ansible.builtin.systemd:
+      name: nginx
+      state: restarted
+      enabled: true
