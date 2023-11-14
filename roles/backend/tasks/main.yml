@@ -10,7 +10,7 @@
     state: present
 
 - name: copy backend service
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
@@ -37,7 +37,7 @@
     state: present
 
 - name: load schema
-  ansible.builtin.shell: mysql -h mysql-dev.praveendevops.online -uroot -p"{{ MYSQL_ROOT_PASSWORD }}" < /app/schema/backend.sql
+  ansible.builtin.shell: mysql -h mysql-{{env}}.praveendevops.online -uroot -p"{{ MYSQL_ROOT_PASSWORD }}" < /app/schema/backend.sql
 
 - name: reload, enable and restart service
   ansible.builtin.systemd:
